@@ -1,0 +1,15 @@
+<div>
+    <div class="loading-zone">
+        <input class="form-control" type="file" (change)="onFileChange($event)" style="width: 75%; display: inline-block;">
+        
+        <ng-container *ngIf="processingFileInProgress" >
+            Processing ...<clr-spinner [clrInline]="true" style="margin-left: 20px;"></clr-spinner>
+        </ng-container>
+        <!-- <ng-container *ngIf="!processingFileInProgress" style="width: 20%; display: inline-block;">
+            <button style="font-size: 12px; margin-left: 10px;" (click)="processFile()" class="btn btn-primary" [disabled]="dataSource == null">
+                Process
+            </button>
+        </ng-container> -->
+    </div>
+
+</div>
