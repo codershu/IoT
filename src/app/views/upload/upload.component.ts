@@ -11,6 +11,7 @@ declare const google: any;
 export class UploadComponent implements OnInit, AfterViewInit {
 
   processingFileInProgress: boolean = false;
+  locationInfoReady: boolean = false;
 
   map: any;
   @ViewChild('mapElement') mapElement: any;
@@ -69,8 +70,9 @@ export class UploadComponent implements OnInit, AfterViewInit {
         geocoder.geocode({location: myPosition})
           .then((response: any) => {
             console.log("check name", response);
-            this.location = response.results[0].formatted_address.split(",")[1];
+            this.location = response.results[0].formatted_address.split(",")[1].replace(" ", "");
             console.log("city name", this.location)
+            this.locationInfoReady = true;
           });
 
       })

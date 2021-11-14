@@ -1,6 +1,6 @@
 <div>
     <div class="loading-zone">
-        <input class="form-control" type="file" (change)="onFileChange($event)" style="width: 75%; display: inline-block;">
+        <input class="form-control" type="file" (change)="onFileChange($event)" style="width: 75%; display: inline-block;" [disabled]="!locationInfoReady">
         
         <ng-container *ngIf="processingFileInProgress" >
             Processing ...<clr-spinner [clrInline]="true" style="margin-left: 20px;"></clr-spinner>
