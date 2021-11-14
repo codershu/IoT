@@ -48,3 +48,8 @@
 .member{
     margin-left: 50px;
 }
+
+.map{
+    width: 80%;
+    height: 50vh;
+}

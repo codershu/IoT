@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { ApiService } from 'src/app/service/api.service';
 
 @Component({
@@ -9,19 +9,14 @@ import { ApiService } from 'src/app/service/api.service';
 
 export class UploadTestComponent implements OnInit {
 
+
   processingFileInProgress: boolean = false;
   location: string = "vancouver";
   fileName: string = "";
-  zoom: number = 16;
-  lat: number = 0;
-  lng: number = 0;
 
   constructor(private apiService: ApiService) { }
 
   ngOnInit(): void {
-    this.get()
-    // this.agmMap.triggerResize(true);
-    this.zoom = 16;
   }
 
   onFileChange(event: any){
@@ -47,18 +42,4 @@ export class UploadTestComponent implements OnInit {
     })
   }
 
-  mapClicked(event: any){
-
-  }
-
-  get(){
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition((position) => {
-        this.lat = position.coords.latitude;
-        this.lng = position.coords.longitude;
-        console.log("my location", position)
-      })
-    }
-  
-  }
 }
