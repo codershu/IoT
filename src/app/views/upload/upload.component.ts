@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import '@cds/core/file/register.js';
 import { ApiService } from 'src/app/service/api.service';
 declare const google: any;
@@ -16,11 +16,17 @@ export class UploadComponent implements OnInit, AfterViewInit {
   map: any;
   @ViewChild('mapElement') mapElement: any;
 
-  location: string = "vancouver";
+  @ViewChild('myInput')
+  myInput!: ElementRef;
+
+  location: string = "Victoria";
   fileName: string = "";
   zoom: number = 14;
   lat: number = 48.4634;
   lng: number = 123.3117;
+  uploadedFile: any;
+  uploading: boolean = false;
+  successfulUpload: boolean = false;
 
   constructor(private apiService: ApiService) { }
   
@@ -33,18 +39,29 @@ export class UploadComponent implements OnInit, AfterViewInit {
   }
 
   onFileChange(event: any){
-    var uploadedFile = <File>event.target.files[0];
-    if (uploadedFile) {
+    this.uploadedFile = <File>event.target.files[0];
+    this.successfulUpload = false;
+  }
 
-      this.fileName = uploadedFile.name;
-
+  submit(){
+    if (this.uploadedFile) {
+      this.uploading = true;
+      this.location = this.location.toLocaleLowerCase().replace(" ", "");
+      this.fileName = this.uploadedFile.name;
       const formData = new FormData();
+      formData.append("thumbnail", this.uploadedFile);
+      // console.log("before upload", this.fileName);
+      setTimeout(() => {
+        this.successfulUpload = false;
+        this.apiService.uploadFileToBlob(this.location, formData).subscribe(response => {
+          // console.log("after upload", response);
+          this.uploading = false;
+          this.uploadedFile = null;
 
-      formData.append("thumbnail", uploadedFile);
-      console.log("before upload", this.fileName);
-      this.apiService.uploadFileToBlob(this.location, formData).subscribe(response => {
-        console.log("after upload", response);
-      })
+          this.myInput.nativeElement.value = "";
+          this.successfulUpload =true;
+        })
+      }, 1000);
 
     }
   }
@@ -69,14 +86,18 @@ export class UploadComponent implements OnInit, AfterViewInit {
         var geocoder = new google.maps.Geocoder();
         geocoder.geocode({location: myPosition})
           .then((response: any) => {
-            console.log("check name", response);
+            // console.log("check name", response);
             this.location = response.results[0].formatted_address.split(",")[1].replace(" ", "");
-            console.log("city name", this.location)
+            // console.log("city name", this.location)
             this.locationInfoReady = true;
           });
 
       })
     }
-  
+  }
+
+  onLocationChange(){
+    this.locationInfoReady = !(!this.location || this.location.length == 0);
+    console.log("has location?", this.locationInfoReady)
   }
 }

@@ -1,19 +1,34 @@
-<div>
-    <div class="loading-zone">
-        <input class="form-control" type="file" (change)="onFileChange($event)" style="width: 75%; display: inline-block;">
+<div class="main-container">
+    <div class="box-inline">
+        <div class="left-section-test">
+        </div>
         
-        <ng-container *ngIf="processingFileInProgress" >
-            Processing ...<clr-spinner [clrInline]="true" style="margin-left: 20px;"></clr-spinner>
-        </ng-container>
-        <!-- <ng-container *ngIf="!processingFileInProgress" style="width: 20%; display: inline-block;">
-            <button style="font-size: 12px; margin-left: 10px;" (click)="processFile()" class="btn btn-primary" [disabled]="dataSource == null">
-                Process
-            </button>
-        </ng-container> -->
+        <div class="right-section-test">
+            <div class="label-font">Location: <span style="color: red;">*</span></div>
+            <div style="margin-bottom: 30px;">
+                <input clrInput placeholder="Your city name" name="location" [(ngModel)]="location" (ngModelChange)="onLocationChange()"/>
+            </div>
+            <div class="label-font" style="margin-bottom: 10px;">Please choose your file to upload:</div>
+            <div class="loading-zone">
+                <input #myInputTest class="form-control" type="file" (change)="onFileChange($event)" style="width: 100%; display: inline-block;" [disabled]="!locationInfoReady">
+            </div>
+            <div>
+                <button class="btn btn-primary" style="margin-top: 10px; font-size: medium;" (click)="submit()" [disabled]="uploadedFile == null">Upload</button>
+            </div>
+            <ng-container *ngIf="uploading">
+                <div class="progress loop">
+                    <progress></progress>
+                </div>
+            </ng-container>
+
+            <ng-container *ngIf="successfulUpload">
+                <div class="label-font">
+                    File uploaded successfully!
+                </div>
+            </ng-container>
+
+        </div>
     </div>
 
-    <div>
-        <label>Location: </label>
-        <input type="text" required>
-    </div>
+
 </div>
