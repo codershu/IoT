@@ -19,7 +19,7 @@ export class UploadComponent implements OnInit, AfterViewInit {
   @ViewChild('myInput')
   myInput!: ElementRef;
 
-  location: string = "Victoria";
+  location: string = "victoria";
   fileName: string = "";
   zoom: number = 14;
   lat: number = 48.4634;
@@ -27,6 +27,7 @@ export class UploadComponent implements OnInit, AfterViewInit {
   uploadedFile: any;
   uploading: boolean = false;
   successfulUpload: boolean = false;
+  initialLoading: boolean = false;
 
   constructor(private apiService: ApiService) { }
   
@@ -67,6 +68,7 @@ export class UploadComponent implements OnInit, AfterViewInit {
   }
 
   getLocation(){
+    this.initialLoading = false;
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition((position) => {
         this.lat = position.coords.latitude;
@@ -87,9 +89,10 @@ export class UploadComponent implements OnInit, AfterViewInit {
         geocoder.geocode({location: myPosition})
           .then((response: any) => {
             // console.log("check name", response);
-            this.location = response.results[0].formatted_address.split(",")[1].replace(" ", "");
+            this.location = response.results[0].formatted_address.toLocaleLowerCase().split(",")[1].replace(" ", "");
             // console.log("city name", this.location)
             this.locationInfoReady = true;
+            this.initialLoading = true;
           });
 
       })
@@ -97,7 +100,17 @@ export class UploadComponent implements OnInit, AfterViewInit {
   }
 
   onLocationChange(){
-    this.locationInfoReady = !(!this.location || this.location.length < 3);
-    // console.log("has location?", this.locationInfoReady)
+    this.locationValidation();
+  }
+
+  locationValidation(){
+    if(this.location == null || this.location.length < 3){
+      this.locationInfoReady = false;
+      return
+    }
+
+    const regex = new RegExp(/^[a-zA-Z0-9-]+$/g);
+    this.locationInfoReady = regex.test(this.location);
+    // console.log("validation result", regex.test(this.location))
   }
 }

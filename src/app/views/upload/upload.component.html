@@ -1,7 +1,7 @@
 <div class="main-container">
     <div class="box-inline">
         <div class="left-section">
-            <ng-container *ngIf="!locationInfoReady">
+            <ng-container *ngIf="!initialLoading">
                 <div class="label-font">
                     Loading your location 
                 </div>
@@ -14,13 +14,15 @@
     
         <div class="right-section">
             <div>
-                <div class="label-font" style="margin-bottom: 30px;">Your current location: <span style="font-weight: bold;">{{location}}</span></div>
+                <div class="label-font" style="margin-bottom: 30px;">Your current location: <span style="font-weight: bold;">{{location}}</span>
+                    <button class="btn btn-primary btn-sm" style="margin-left: 10px; font-size: small;" (click)="getLocation()" [disabled]="!initialLoading">Re-Locate <clr-icon shape="refresh"></clr-icon></button>
+                </div>
             </div>
 
             <div class="label-font">If the above location is not correct, please input your location:</div>
             <div style="margin-bottom: 30px;">
                 <input clrInput placeholder="Your city name" name="location" [(ngModel)]="location" (ngModelChange)="onLocationChange()"/>
-                <ng-container *ngIf="!locationInfoReady"><span style="color: red;">The loaction name must be 3 to 63 characters long</span></ng-container>
+                <ng-container *ngIf="!locationInfoReady && initialLoading"><span style="color: red;">The loaction name may only contain lowercase letters, numbers, and hyphens, and must begin with a letter or a number, 3 to 63 characters long</span></ng-container>
             </div>
 
             <div class="label-font" style="margin-bottom: 10px;">Please choose your file to upload:</div>
