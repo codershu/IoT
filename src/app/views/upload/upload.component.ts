@@ -97,7 +97,7 @@ export class UploadComponent implements OnInit, AfterViewInit {
   }
 
   onLocationChange(){
-    this.locationInfoReady = !(!this.location || this.location.length == 0);
-    console.log("has location?", this.locationInfoReady)
+    this.locationInfoReady = !(!this.location || this.location.length < 3);
+    // console.log("has location?", this.locationInfoReady)
   }
 }

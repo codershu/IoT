@@ -55,7 +55,7 @@ export class UploadTestComponent implements OnInit {
 
   onLocationChange(){
     this.locationInfoReady = !(!this.location || this.location.length == 0);
-    console.log("has location?", this.locationInfoReady)
+    // console.log("has location?", this.locationInfoReady)
   }
 
 }

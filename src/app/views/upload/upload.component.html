@@ -20,6 +20,7 @@
             <div class="label-font">If the above location is not correct, please input your location:</div>
             <div style="margin-bottom: 30px;">
                 <input clrInput placeholder="Your city name" name="location" [(ngModel)]="location" (ngModelChange)="onLocationChange()"/>
+                <ng-container *ngIf="!locationInfoReady"><span style="color: red;">The loaction name must be 3 to 63 characters long</span></ng-container>
             </div>
 
             <div class="label-font" style="margin-bottom: 10px;">Please choose your file to upload:</div>
