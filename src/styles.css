@@ -14,6 +14,16 @@
     background-color: white;
 }
 
+.project-title{
+    font-size: 24px;
+}
+
+.nav-sub-title{
+    color: white;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
 .current-date-tag{
     text-align: center;
     margin-top: 10px;
@@ -96,4 +106,64 @@
     vertical-align: left;
     width: 50%;
     /* border: 1px black solid; */
+}
+
+.data-grid{
+    height: auto;
+    width: 1000px;
+}
+
+@media screen and (max-width:700px) {
+    .main-container{
+        width: 100%;
+        height: auto;
+        background-color: white;
+    }
+
+    .nav-sub-title{
+        color: white;
+        margin-left: 5px;
+        margin-right: 5px;
+        font-size: 6px;
+    }
+
+    .project-title{
+        font-size: 8px;
+    }
+
+    .left-section{
+        display: inline-block;
+        padding: 1rem 1rem;
+        vertical-align: middle;
+        width: 100%;
+        /* border: 1px black solid; */
+    }
+    
+    .right-section{
+        display: inline-block;
+        /* padding: 1rem 1rem; */
+        vertical-align: middle;
+        width: 100%;
+        /* border: 1px black solid; */
+    }
+
+    .loading-zone{
+        font-size: 12px;
+    }
+
+    .label-font{
+        font-size: large;
+        font-weight: 400;
+        font-size: 12px;
+    }
+
+    .data-grid{
+        height: auto;
+        width: 300px;
+        overflow-x:scroll;
+    }
+
+    .member{
+        margin-left: 30px;
+    }
 }

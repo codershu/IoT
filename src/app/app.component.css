@@ -19,12 +19,6 @@
     flex: 1;
 }
 
-.nav-sub-title{
-    color: white;
-    margin-left: 20px;
-    margin-right: 20px;
-}
-
 .content {
     display: flex;
     margin: 82px auto 32px;

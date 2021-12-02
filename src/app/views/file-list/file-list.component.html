@@ -23,17 +23,19 @@
     <div class="label-font" style="margin-top: 50px;">
         Files in Selected Container
     </div>
-    <clr-datagrid>
-        <clr-dg-column [clrDgField]="'name'">Name</clr-dg-column>
-        <clr-dg-column [clrDgField]="'uri'">Uri</clr-dg-column>
-        <clr-dg-column [clrDgField]="'updatedOn'">Creation date</clr-dg-column>
-      
-        <clr-dg-row *ngFor="let file of files">
-          <clr-dg-cell>{{file.name}}</clr-dg-cell>
-          <clr-dg-cell>{{file.uri}}</clr-dg-cell>
-          <clr-dg-cell>{{file.updatedOn | date:'medium'}}</clr-dg-cell>
-        </clr-dg-row>
-      
-        <clr-dg-footer>{{files.length}} files</clr-dg-footer>
-      </clr-datagrid>
+    <div class="data-grid">
+        <clr-datagrid>
+            <clr-dg-column [clrDgField]="'name'">Name</clr-dg-column>
+            <clr-dg-column [clrDgField]="'uri'">Uri</clr-dg-column>
+            <clr-dg-column [clrDgField]="'updatedOn'">Creation date</clr-dg-column>
+          
+            <clr-dg-row *ngFor="let file of files">
+              <clr-dg-cell>{{file.name}}</clr-dg-cell>
+              <clr-dg-cell>{{file.uri}}</clr-dg-cell>
+              <clr-dg-cell>{{file.updatedOn | date:'medium'}}</clr-dg-cell>
+            </clr-dg-row>
+          
+            <clr-dg-footer>{{files.length}} files</clr-dg-footer>
+        </clr-datagrid>
+    </div>
 </div>

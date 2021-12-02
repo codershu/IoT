@@ -15,7 +15,7 @@
         <div class="right-section">
             <div>
                 <div class="label-font" style="margin-bottom: 30px;">Your current location: <span style="font-weight: bold;">{{location}}</span>
-                    <button class="btn btn-primary btn-sm" style="margin-left: 10px; font-size: small;" (click)="getLocation()" [disabled]="!initialLoading">Re-Locate <clr-icon shape="refresh"></clr-icon></button>
+                    <button class="btn btn-primary btn-sm" style="margin-left: 10px; font-size: small;" (click)="getLocation()" [disabled]="!initialLoading"><span class="label-font">Re-Locate <clr-icon shape="refresh"></clr-icon> </span></button>
                 </div>
             </div>
 
@@ -26,11 +26,11 @@
             </div>
 
             <div class="label-font" style="margin-bottom: 10px;">Please choose your file to upload:</div>
-            <div class="loading-zone">
-                <input #myInput class="form-control" type="file" (change)="onFileChange($event)" style="width: 100%; display: inline-block;" [disabled]="!locationInfoReady">
+            <div>
+                <input #myInput class="form-control loading-zone" type="file" (change)="onFileChange($event)" style="width: 100%; display: inline-block;" [disabled]="!locationInfoReady">
             </div>
             <div>
-                <button class="btn btn-primary" style="margin-top: 10px; font-size: medium;" (click)="submit()" [disabled]="uploadedFile == null">Upload</button>
+                <button class="btn btn-primary" style="margin-top: 10px; font-size: medium;" (click)="submit()" [disabled]="uploadedFile == null"><span class="label-font">Upload</span></button>
             </div>
             <ng-container *ngIf="uploading">
                 <div class="progress loop">

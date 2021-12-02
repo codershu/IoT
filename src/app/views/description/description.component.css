@@ -10,3 +10,13 @@ li{
     margin-bottom: 10px;
 }
 
+@media screen and (max-width:600px) {
+    .main-content{
+        padding-left: 10%;
+        padding-right: 10%;
+        padding-top: 50px;
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 14px;
+    }
+}
+
